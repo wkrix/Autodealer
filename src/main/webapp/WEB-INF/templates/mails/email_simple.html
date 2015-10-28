@@ -2,12 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title th:remove="all">Template for HTML email (simple)</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-   </head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
 <body>
 <p th:text="#{greeting(${name})}">
     Hello, Walter!
 </p>
+
 <p th:inline="text">[[#{sell.date}]] <span th:text="${#dates.format(sellDate, #messages.msg('app.date.format'))}">28-12-2012</span>
 </p>
 <table>
@@ -28,7 +29,7 @@
 </table>
 
 <p th:inline="text">
-    [[#{email.end}]], <br />
+    [[#{email.end}]], <br/>
     &emsp; <em>AUTODEALER</em>
 </p>
 </body>

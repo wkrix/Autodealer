@@ -14,8 +14,9 @@
 </head>
 <body>
 <div class="container">
-       <h1>AN ERROR OCCURRED</h1></div>
+    <h1>AN ERROR OCCURRED</h1></div>
 <p>message: <span th:text="${errorMsg}"/></p>
+
 <p th:if="${ip!= null}" th:text="#{ip.text(${ip})}">The blocked ip is: 192.168.1.12</p>
 
 </body>

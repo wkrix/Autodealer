@@ -73,6 +73,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * A thymeleaf input UTF-8 kezelesehez szukseges.
+     *
      * @return
      */
     private CharacterEncodingFilter getFilter() {

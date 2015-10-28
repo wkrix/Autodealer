@@ -13,7 +13,8 @@
 <body>
 <div th:replace="views/fragments/fragments :: header">Header</div>
 <div class="container">
-    <form class="form-narrow form-horizontal form-signin" role="form" action="#" method="post" th:action="@{/authenticate}">
+    <form class="form-narrow form-horizontal form-signin" role="form" action="#" method="post"
+          th:action="@{/authenticate}">
         <th:block th:if="${param.error}">
             <div th:replace="views/fragments/alert :: alert (type='danger', message=#{signin.error})">
                 Alert
@@ -28,14 +29,16 @@
                 <label for="inputUsername" class="col-sm-3 control-label" th:text="#{username.label}">Username</label>
 
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="inputUsername" th:placeholder="#{username.label}" placeholder="Username" name="username"/>
+                    <input type="text" class="form-control" id="inputUsername" th:placeholder="#{username.label}"
+                           placeholder="Username" name="username"/>
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputPassword" class="col-sm-3 control-label" th:text="#{password.label}">Password</label>
 
                 <div class="col-sm-9">
-                    <input type="password" class="form-control" id="inputPassword" th:placeholder="#{password.label}" placeholder="Password"
+                    <input type="password" class="form-control" id="inputPassword" th:placeholder="#{password.label}"
+                           placeholder="Password"
                            name="password"/>
                 </div>
             </div>

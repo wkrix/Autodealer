@@ -1,8 +1,8 @@
-$(document).ready(function(){
-    $("#en_flag").on("click", function(){
+$(document).ready(function () {
+    $("#en_flag").on("click", function () {
         updateParam("lang", "en");
     });
-    $("#hu_flag").on("click", function(){
+    $("#hu_flag").on("click", function () {
         updateParam("lang", "hu");
     });
 });

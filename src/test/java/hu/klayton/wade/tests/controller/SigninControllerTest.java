@@ -25,7 +25,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class SigninControllerTest extends BaseTest {
 
 
-
     @Autowired
     private UserService userService;
 

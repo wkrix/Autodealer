@@ -74,6 +74,7 @@ public class WebAppConfiguration extends WebMvcConfigurerAdapter {
     /**
      * Igy tudjuk kinyerni a propertyies fajlokbol az adatot a placeholderek segitsegevel,
      * enelkul a @Value annotacio nem hasznalhato, az Environmentet kell Autowiredezni es abbol kiolvasni a property erteket
+     *
      * @return
      */
     @Bean
@@ -120,6 +121,7 @@ public class WebAppConfiguration extends WebMvcConfigurerAdapter {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler(resourceHandler).addResourceLocations(resourceLocation);
     }
+
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();

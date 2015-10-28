@@ -24,7 +24,7 @@ import java.util.Properties;
 @PropertySource("classpath:persistence.properties")
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackageClasses = BasePackageScan.class)
-public class JpaConfig{
+public class JpaConfig {
 
 
     @Value("${dataSource.driverClassName}")

@@ -15,18 +15,20 @@
 
 <nav th:fragment="header" class="navbar navbar-inverse">
     <div class="container-fluid">
-        <div class="navbar-header navbar-brand" th:text="#{title}">WebSiteName </div>
+        <div class="navbar-header navbar-brand" th:text="#{title}">WebSiteName</div>
         <div>
             <ul th:if="${#authorization.expression('isAuthenticated()')}" class="nav navbar-nav">
                 <li class="active"><a th:href="@{/}" href="#" th:text="#{navbar.home}">Home</a></li>
-                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#" th:text="#{navbar.vehicle}">Vehicles <span
+                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"
+                                        th:text="#{navbar.vehicle}">Vehicles <span
                         class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#" th:href="@{/vehicle/create_vehicle}" th:text="#{vehicle.create}">Create</a></li>
                         <li><a href="#" th:href="@{/vehicle/list_vehicles}" th:text="#{vehicle.list}">List</a></li>
                     </ul>
                 </li>
-                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#" th:text="#{navbar.customer}">Customers <span
+                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"
+                                        th:text="#{navbar.customer}">Customers <span
                         class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#" th:href="@{/customer/create_customer}" th:text="#{customer.create}">Create</a>

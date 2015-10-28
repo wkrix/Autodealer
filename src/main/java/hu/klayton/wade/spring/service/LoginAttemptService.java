@@ -16,7 +16,7 @@ public class LoginAttemptService {
     private static Map<String, Integer> attemptsMap;
 
     @PostConstruct
-    public void initialize(){
+    public void initialize() {
         attemptsMap = new HashMap<>();
     }
 
@@ -41,7 +41,7 @@ public class LoginAttemptService {
         return attemptNumber == null ? 0 : attemptNumber;
     }
 
-    public void clearAll(){
+    public void clearAll() {
         attemptsMap.clear();
     }
 

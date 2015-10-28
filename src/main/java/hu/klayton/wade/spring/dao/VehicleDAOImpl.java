@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * @author Walter Krix <walter.krix@inbuss.hu>
- *     Ez az osztaly nem hasznalt, miota helyettesittem Spring Data-val, de referencianak fentmarad.
+ *         Ez az osztaly nem hasznalt, miota helyettesittem Spring Data-val, de referencianak fentmarad.
  */
 @Repository
 @Transactional
