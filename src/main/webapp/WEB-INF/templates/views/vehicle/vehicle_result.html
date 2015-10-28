@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+</head>
+<body>
+<div th:replace="views/fragments/fragments :: header">Header</div>
+<div th:fragment="vehicleResultList" th:if="!${#lists.isEmpty(resultVehicles)}" class="results-block">
+    <table>
+
+        <tbody>
+        <tr th:each="vehicle : ${resultVehicles}">
+            <td th:text="${vehicle.vehicleName}">BMW</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div th:fragment="vehicleResultList" th:if="${#lists.isEmpty(resultVehicles)}" class="results-block">
+   <span th:text="#{vehiclelist.isempty}"></span>
+</div>
+</body>
+</html>

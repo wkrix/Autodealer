@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sign In</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" media="screen" th:href="@{/resources/css/flag-icon.min.css}"/>
+    <link rel="stylesheet" media="screen" th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}"/>
+    <script th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/3.3.5/js/bootstrap.min.js}"></script>
+    <script th:src="@{/resources/js/lang-change.js}"></script>
+</head>
+<body>
+<div th:replace="views/fragments/fragments :: header">Header</div>
+<div class="container">
+    <form class="form-narrow form-horizontal form-signin" role="form" action="#" method="post" th:action="@{/authenticate}">
+        <th:block th:if="${param.error}">
+            <div th:replace="views/fragments/alert :: alert (type='danger', message=#{signin.error})">
+                Alert
+            </div>
+        </th:block>
+        <th:block th:if="${param.logout}">
+            <div th:replace="views/fragments/alert :: alert (type='info', message=#{signin.logout})">Alert</div>
+        </th:block>
+        <fieldset>
+            <legend th:text="#{signin.title}">Please Sign In</legend>
+            <div class="form-group">
+                <label for="inputUsername" class="col-sm-3 control-label" th:text="#{username.label}">Username</label>
+
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="inputUsername" th:placeholder="#{username.label}" placeholder="Username" name="username"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword" class="col-sm-3 control-label" th:text="#{password.label}">Password</label>
+
+                <div class="col-sm-9">
+                    <input type="password" class="form-control" id="inputPassword" th:placeholder="#{password.label}" placeholder="Password"
+                           name="password"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-9">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="remember_me_key" th:text="#{signin.rememberme}"/>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-9">
+                    <button type="submit" class="btn btn-primary" th:text="#{signin.button}">Sign in</button>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-9">
+                </div>
+            </div>
+        </fieldset>
+    </form>
+
+</div>
+</body>
+</html>

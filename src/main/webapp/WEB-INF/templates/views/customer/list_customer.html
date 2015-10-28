@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Vehicle creator page</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width"/>
+
+    <link rel="stylesheet" media="screen" th:href="@{/resources/css/flag-icon.min.css}"/>
+    <link rel="stylesheet" media="screen" th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}"/>
+    <script th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/3.3.5/js/bootstrap.min.js}"></script>
+    <script th:src="@{/resources/js/lang-change.js}"></script>
+</head>
+<body>
+<div th:replace="views/fragments/fragments :: header">Header</div>
+<div class="container">
+    <h2 th:text="#{table.customer.title}">Customers</h2>
+
+    <p th:text="#{table.customer.title2}">Sellers blablabal:</p>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th th:text="#{table.customer.header.name}">Name</th>
+            <th th:text="#{table.customer.header.country}">Country</th>
+            <th th:text="#{table.customer.header.email}">Email</th>
+            <th>#</th>
+            <th th:text="#{table.customer.header.vehicles}">Vehicles</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="c : ${customerList}">
+            <td th:text="${c.name}">Ford</td>
+            <td th:text="${c.country}">4</td>
+            <td th:text="${c.email}">w@w.com</td>
+            <td><a th:href="@{${'/customer/delete/' + c.id}}"><span th:text="#{table.delete}">Delete</span></a></td>
+            <td><a th:href="@{${'/customer/modify/' + c.id}}"><span th:text="#{table.modify}">Modify</span></a></td>
+
+            <td>
+                <button id="list-vehicles" th:attr="data-vehicle_id=${c.id}" type="button" class="btn btn-info">Info
+                </button>
+            </td>
+            <td>
+                <div th:id="resultsBlock+ ${c.id}"></div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("body").on("click", "#list-vehicles", function (e) {
+            var id = $(this).attr("data-vehicle_id");
+            var url = '/vehicle/list_vehicle_block/';
+            url = url + id;
+            $("#resultsBlock" + id).load(url);
+        });
+    });
+
+</script>
+</body>
+</html>

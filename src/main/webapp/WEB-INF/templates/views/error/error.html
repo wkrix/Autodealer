@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Hello page</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width"/>
+    <link rel="stylesheet" media="screen" th:href="@{/resources/css/flag-icon.min.css}"/>
+    <link rel="stylesheet" media="screen" th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}"/>
+    <script th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/3.3.5/js/bootstrap.min.js}"></script>
+    <script th:src="@{/resources/js/lang-change.js}"></script>
+</head>
+<body>
+<div class="container">
+       <h1>AN ERROR OCCURRED</h1></div>
+<p>message: <span th:text="${errorMsg}"/></p>
+<p th:if="${ip!= null}" th:text="#{ip.text(${ip})}">The blocked ip is: 192.168.1.12</p>
+
+</body>
+</html>

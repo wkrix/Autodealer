@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Vehicle creator page</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width"/>
+    <link rel="stylesheet" media="screen" th:href="@{/resources/css/flag-icon.min.css}"/>
+    <link rel="stylesheet" media="screen" th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}"/>
+    <script th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/3.3.5/js/bootstrap.min.js}"></script>
+    <script th:src="@{/resources/js/lang-change.js}"></script>
+</head>
+<body>
+<div th:replace="views/fragments/fragments :: header">Header</div>
+<div class="container">
+    <form class="form-horizontal" th:action="@{/vehicle/create}" th:object="${vehicle}" method="post" role="form">
+        <fieldset>
+            <legend th:text="#{table.newVehicle.title}">New Vehicle</legend>
+            <input type="hidden" th:field="*{id}"/>
+            <input type="hidden" th:field="*{status}"/>
+
+            <div class="form-group">
+                <label for="inputVehicleName" class="col-xs-2 control-label" th:text="#{vehicle.name}">Vehicle
+                    name:</label>
+
+                <div class="col-xs-4" th:classappend="${#fields.hasErrors('vehicleName')}? 'has-error'">
+                    <input type="text" class="form-control" id="inputVehicleName" th:placeholder="#{customer.name}"
+                           placeholder="Vehicle name" name="name"
+                           th:field="*{vehicleName}"/>
+                </div>
+                <span th:if="${#fields.hasErrors('vehicleName')}" class="glyphicon glyphicon-exclamation-sign has-error"
+                      aria-hidden="true" data-toggle="tooltip" data-placement="right"
+                      th:attr="title=${#fields.errors('vehicleName').get(0)}"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="inputNumberOfWheels" class="col-xs-2 control-label" th:text="#{vehicle.wheels}">Wheels
+                    number:</label>
+
+                <div class="col-xs-4" th:classappend="${#fields.hasErrors('numberOfWheels')}? 'has-error'">
+                    <input type="text" class="form-control" id="inputNumberOfWheels" th:placeholder="#{vehicle.wheels}"
+                           placeholder="Number of wheels" name="name"
+                           th:field="*{numberOfWheels}"/>
+                </div>
+                <span th:if="${#fields.hasErrors('numberOfWheels')}"
+                      class="glyphicon glyphicon-exclamation-sign has-error"
+                      aria-hidden="true" data-toggle="tooltip" data-placement="right"
+                      th:attr="title=${#fields.errors('numberOfWheels').get(0)}"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="inputVehicleColor" class="col-xs-2 control-label" th:text="#{vehicle.color}">Vehicle
+                    Color:</label>
+
+                <div class="col-xs-4" th:classappend="${#fields.hasErrors('color')}? 'has-error'">
+                    <input type="text" class="form-control" id="inputVehicleColor" th:placeholder="#{vehicle.color}"
+                           placeholder="Color" name="name"
+                           th:field="*{color}"/>
+                </div>
+                <span th:if="${#fields.hasErrors('color')}" class="glyphicon glyphicon-exclamation-sign has-error"
+                      aria-hidden="true" data-toggle="tooltip" data-placement="right"
+                      th:attr="title=${#fields.errors('color').get(0)}"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-2 control-label" th:text="#{vehicle.type}">Vehicle
+                    Type:</label>
+
+                <div class="col-xs-4" th:classappend="${#fields.hasErrors('type')}? 'has-error'">
+                    <div th:each="ty : ${allTypes}" class="radio"
+                         th:classappend="${#fields.hasErrors('type')}? 'has-error'">
+                        <input type="radio" class="form-control" th:field="*{type}" th:value="${ty} "/>
+                        <label th:for="${#ids.prev('type')}" th:text="#{${'vehicle.type.' + ty}}">MIVAN</label>
+
+                    </div>
+                </div>
+                        <span th:if="${#fields.hasErrors('type')}"
+                              class="glyphicon glyphicon-exclamation-sign has-error"
+                              aria-hidden="true" data-toggle="tooltip" data-placement="right"
+                              th:attr="title=${#fields.errors('type').get(0)}"></span>
+            </div>
+
+            <div class="form-group">
+                <div class="col-xs-offset-2 col-xs-10">
+                    <button type="submit" class="btn btn-success" th:text="#{vehicle.create.submit}">Submit</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
+</body>
+</html>

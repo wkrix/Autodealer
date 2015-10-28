@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Seller's page</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width"/>
+    <link rel="stylesheet" media="screen" th:href="@{/resources/css/flag-icon.min.css}"/>
+    <link rel="stylesheet" media="screen" th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}"/>
+    <script th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/3.3.5/js/bootstrap.min.js}"></script>
+    <script th:src="@{/resources/js/lang-change.js}"></script>
+
+</head>
+<body>
+<div th:replace="views/fragments/fragments :: header">Header</div>
+<div class="container">
+    <h2 th:text="#{table.title}">Sellers</h2>
+
+    <p th:text="#{table.title2}">Sellers blablabal:</p>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th th:text="#{table.header.vehicle_name}">Vehicle name</th>
+            <th th:text="#{table.header.number_of_wheels}">Number of wheels</th>
+            <th th:text="#{table.header.color}">Color</th>
+            <th th:text="#{table.header.type}">Type</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="v : ${vehiclesForSale}">
+            <td th:text="${v.vehicleName}">Ford</td>
+            <td th:text="${v.numberOfWheels}">4</td>
+            <td th:text="${v.color}">red</td>
+            <td th:text="#{${'vehicle.type.' + v.type}}">Type</td>
+            <td><a th:href="@{${'/vehicle/delete/' + v.id}}"><span th:text="#{table.delete}">Delete</span></a></td>
+            <td><a th:href="@{${'/vehicle/modify/' + v.id}}"><span th:text="#{table.modify}">Modify</span></a></td>
+            <td><a class="btn btn-default" th:href="@{${'/vehicle/sell/' + v.id}}"><span
+                    class="glyphicon glyphicon-euro" aria-hidden="true" th:text="#{table.sell}">Sell</span></a></td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

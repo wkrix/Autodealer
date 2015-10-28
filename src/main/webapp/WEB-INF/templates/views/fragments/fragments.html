@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home page</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width"/>
+    <link rel="stylesheet" media="screen" th:href="@{/resources/css/flag-icon.min.css}"/>
+    <link rel="stylesheet" media="screen" th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}"/>
+    <script th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/3.3.5/js/bootstrap.min.js}"></script>
+    <script th:src="@{/resources/js/lang-change.js}"></script>
+</head>
+<body>
+
+<nav th:fragment="header" class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header navbar-brand" th:text="#{title}">WebSiteName </div>
+        <div>
+            <ul th:if="${#authorization.expression('isAuthenticated()')}" class="nav navbar-nav">
+                <li class="active"><a th:href="@{/}" href="#" th:text="#{navbar.home}">Home</a></li>
+                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#" th:text="#{navbar.vehicle}">Vehicles <span
+                        class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" th:href="@{/vehicle/create_vehicle}" th:text="#{vehicle.create}">Create</a></li>
+                        <li><a href="#" th:href="@{/vehicle/list_vehicles}" th:text="#{vehicle.list}">List</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#" th:text="#{navbar.customer}">Customers <span
+                        class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" th:href="@{/customer/create_customer}" th:text="#{customer.create}">Create</a>
+                        </li>
+                        <li><a href="#" th:href="@{/customer/list_customers}" th:text="#{customer.list}">List</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <span id="en_flag" class="flag-icon flag-icon-gb"></span>
+                <span id="hu_flag" class="flag-icon flag-icon-hu"></span>
+                <li th:if="${#authorization.expression('!isAuthenticated()')}"><a href="#" th:href="@{/signup}"><span
+                        class="glyphicon glyphicon-user" th:text="' ' + #{navbar.signup}"></span></a></li>
+                <li th:if="${#authorization.expression('!isAuthenticated()')}"><a href="#" th:href="@{/signin}"><span
+                        class="glyphicon glyphicon-log-in" th:text="' ' + #{navbar.login}"></span></a></li>
+                <li th:if="${#authorization.expression('isAuthenticated()')}">
+                    <a href="/logout" th:href="@{#}" onclick="$('#logout-form').submit();"><span
+                            class="glyphicon glyphicon-log-out" th:text="' ' + #{navbar.logout}"></span></a>
+
+                    <form id="logout-form" method="post" action="#" th:action="@{/logout}"></form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div th:fragment="footer">
+
+    <p class="text-muted">&copy; 2015 Klayton Wade</p>
+
+</div>
+</body>
+</html>

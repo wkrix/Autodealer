@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:remove="all">Template for HTML email (simple)</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   </head>
+<body>
+<p th:text="#{greeting(${name})}">
+    Hello, Walter!
+</p>
+<p th:inline="text">[[#{sell.date}]] <span th:text="${#dates.format(sellDate, #messages.msg('app.date.format'))}">28-12-2012</span>
+</p>
+<table>
+    <thead>
+    <tr>
+        <th th:text="#{table.header.vehicle_name}">Vehicle's name</th>
+        <th th:text="#{table.header.color}">Vehicle's color</th>
+        <th th:text="#{table.header.type}">Vehicle's type</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td th:text="${vehicleName}">Jaguar</td>
+        <td th:text="${vehicleColor}">Green</td>
+        <td th:text="#{${'vehicle.type.' + vehicleType}}">CAR</td>
+    </tr>
+    </tbody>
+</table>
+
+<p th:inline="text">
+    [[#{email.end}]], <br />
+    &emsp; <em>AUTODEALER</em>
+</p>
+</body>
+</html>

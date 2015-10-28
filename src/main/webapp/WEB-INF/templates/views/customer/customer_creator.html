@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Vehicle creator page</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width"/>
+    <link rel="stylesheet" media="screen" th:href="@{/resources/css/flag-icon.min.css}"/>
+    <link rel="stylesheet" media="screen" th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}"/>
+    <script th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/3.3.5/js/bootstrap.min.js}"></script>
+    <script th:src="@{/resources/js/lang-change.js}"></script>
+</head>
+<body>
+<div th:replace="views/fragments/fragments :: header">Header</div>
+<div class="container">
+    <form class="form-horizontal" th:action="@{'/customer/create/'}" th:object="${customer}" method="post" role="form">
+        <fieldset>
+            <legend th:text="#{table.newCustomer.title}">New Customer</legend>
+            <p th:text="#{table.newCustomer.title2}">Customer blablabal:</p>
+
+            <input type="hidden" th:field="*{id}"/>
+
+            <div class="form-group">
+                <label for="inputCustomerName" class="col-xs-2 control-label" th:text="#{customer.name}">Customer
+                    name:</label>
+
+                <div class="col-xs-4" th:classappend="${#fields.hasErrors('name')}? 'has-error'">
+                    <input type="text" class="form-control" id="inputCustomerName" th:placeholder="#{customer.name}"
+                           placeholder="Customer name" name="name"
+                           th:field="*{name}"/>
+                </div>
+                <span th:if="${#fields.hasErrors('name')}" class="glyphicon glyphicon-exclamation-sign has-error"
+                      aria-hidden="true" data-toggle="tooltip" data-placement="right"
+                      th:attr="title=${#fields.errors('name').get(0)}"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="inputCountry" class="col-xs-2 control-label" th:text="#{customer.country}">Customer
+                    country:</label>
+
+                <div class="col-xs-4" th:classappend="${#fields.hasErrors('country')}? 'has-error'">
+                    <input type="text" class="form-control" id="inputCountry" th:placeholder="#{customer.country}"
+                           placeholder="Customer country" name="country"
+                           th:field="*{country}"/>
+                </div>
+                 <span th:if="${#fields.hasErrors('country')}" class="glyphicon glyphicon-exclamation-sign has-error"
+                       aria-hidden="true" data-toggle="tooltip" data-placement="right"
+                       th:attr="title=${#fields.errors('country').get(0)}"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="inputEmail" class="col-xs-2 control-label" th:text="#{customer.email}">Customer
+                    country:</label>
+
+                <div class="col-xs-4" th:classappend="${#fields.hasErrors('email')}? 'has-error'">
+                    <input type="text" class="form-control" id="inputEmail" th:placeholder="#{customer.email}"
+                           placeholder="Customer email" name="email"
+                           th:field="*{email}"/>
+                </div>
+                <span th:if="${#fields.hasErrors('email')}" class="glyphicon glyphicon-exclamation-sign has-error"
+                      aria-hidden="true" data-toggle="tooltip" data-placement="right"
+                      th:attr="title=${#fields.errors('email').get(0)}"></span>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-offset-2 col-xs-10">
+                    <button type="submit" class="btn btn-success" th:text="#{customer.save}">Submit</button>
+                </div>
+            </div>
+        </fieldset>
+
+    </form>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
+</body>
+</html>
