@@ -5,7 +5,7 @@ Summary
 -------
 Web application for Vehicle Sales. It's a simple application to demonstrate how to configure Spring MVC. Using Thymeleaf, Ajax, Spring Security, etc.
 
-Generated project characteristics
+Include
 -------------------------
 * No-xml Spring MVC 4 web application for Servlet 3.0 environment
 * Thymeleaf, Bootstrap
