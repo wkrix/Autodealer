@@ -7,7 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * @author Walter Krix <walter.krix@inbuss.hu>
+ * @author Walter Krix <wkrix89@gmail.com>
  */
 @ControllerAdvice
 public class AppExceptionHandler {

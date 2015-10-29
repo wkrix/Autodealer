@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.validation.Valid;
 
 /**
- * @author Walter Krix <walter.krix@inbuss.hu>
+ * @author Walter Krix <wkrix89@gmail.com>
  */
 @Controller
 public class SignupController {

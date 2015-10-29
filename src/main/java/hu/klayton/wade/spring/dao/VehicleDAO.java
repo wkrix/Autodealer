@@ -5,7 +5,7 @@ import hu.klayton.wade.spring.entity.Vehicle;
 import java.util.List;
 
 /**
- * @author Walter Krix <walter.krix@inbuss.hu>
+ * @author Walter Krix <wkrix89@gmail.com>
  *         Ez az osztaly nem hasznalt, miota helyettesittem Spring Data-val, de referencianak fentmarad.
  */
 public interface VehicleDAO {

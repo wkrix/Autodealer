@@ -4,7 +4,7 @@ import hu.klayton.wade.spring.entity.Seller;
 import org.springframework.data.repository.CrudRepository;
 
 /**
- * @author Walter Krix <walter.krix@inbuss.hu>
+ * @author Walter Krix <wkrix89@gmail.com>
  */
 public interface SellerRepository extends CrudRepository<Seller, Long> {
 

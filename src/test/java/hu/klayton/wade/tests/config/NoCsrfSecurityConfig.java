@@ -6,7 +6,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 
 /**
- * @author Walter Krix <walter.krix@inbuss.hu>
+ * @author Walter Krix <wkrix89@gmail.com>
  */
 @Configuration
 @Order(1)

@@ -18,7 +18,7 @@ import javax.annotation.PostConstruct;
 import java.util.Collections;
 
 /**
- * @author Walter Krix <walter.krix@inbuss.hu>
+ * @author Walter Krix <wkrix89@gmail.com>
  */
 @Service
 public class UserService implements UserDetailsService {
@@ -33,7 +33,7 @@ public class UserService implements UserDetailsService {
 
     @PostConstruct
     protected void initialize() {
-        save(new Seller("zoli", "password", "ROLE_USER"));
+        save(new Seller("dummySeller", "password", "ROLE_USER"));
         save(new Seller("walter", "jelszo", "ROLE_USER"));
     }
 

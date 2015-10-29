@@ -1,7 +1,7 @@
 package hu.klayton.wade.spring.error;
 
 /**
- * @author Walter Krix <walter.krix@inbuss.hu>
+ * @author Walter Krix <wkrix89@gmail.com>
  */
 public class LoginException extends RuntimeException {
 

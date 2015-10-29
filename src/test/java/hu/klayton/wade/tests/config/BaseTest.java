@@ -25,7 +25,7 @@ import java.util.HashSet;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 /**
- * @author Walter Krix <walter.krix@inbuss.hu>
+ * @author Walter Krix <wkrix89@gmail.com>
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @org.springframework.test.context.web.WebAppConfiguration

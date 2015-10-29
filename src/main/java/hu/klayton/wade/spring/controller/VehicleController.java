@@ -25,7 +25,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @author Walter Krix <walter.krix@inbuss.hu>
+ * @author Walter Krix <wkrix89@gmail.com>
  */
 @Controller
 @RequestMapping(value = "/vehicle")
@@ -56,9 +56,9 @@ public class VehicleController {
         vehicleRepository.save(new Vehicle("KTM", 2, "Orange", Vehicle.Type.BIKE));
         vehicleRepository.save(new Vehicle("Hyundai", 4, "White", Vehicle.Type.AUTO));
 
-        customerRepository.save(new Customer("Miron Costin", "Románia", "walter.krix@inbuss.hu"));
+        customerRepository.save(new Customer("Miron Costin", "Románia", "wkrix89@gmail.com"));
         customerRepository.save(new Customer("Peter Robinson", "Észak-Írország", "zoltan.szecsko@inbuss.hu"));
-        customerRepository.save(new Customer("Kis Emőke", "Magyarország", "walter.krix@inbuss.hu"));
+        customerRepository.save(new Customer("Kis Emőke", "Magyarország", "wkrix89@gmail.com"));
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)

@@ -4,7 +4,7 @@ import hu.klayton.wade.spring.entity.Seller;
 import org.hibernate.validator.constraints.NotBlank;
 
 /**
- * @author Walter Krix <walter.krix@inbuss.hu>
+ * @author Walter Krix <wkrix89@gmail.com>
  */
 public class SellerDTO {
 
