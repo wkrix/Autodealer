@@ -279,5 +279,15 @@ Features
 
 
 
-**[Note: No additional services are required in order to start the application. Although you can configure the SMTP server for sending e-mail messages in mail.properties as mail.host.]**
+**[Note1: No additional services are required in order to start the application. Although you can configure the SMTP server for sending e-mail messages in mail.properties as mail.host.]**
+
+**[Note2: You can ignore these errors: 
+    ```
+                             ERROR o.h.tool.hbm2ddl.SchemaExport - HHH000389: Unsuccessful: alter table Vehicle drop constraint FKlfypeh78vd2fyhwv6c13tuqln
+                             ERROR o.h.tool.hbm2ddl.SchemaExport - user lacks privilege or object not found: PUBLIC.VEHICLE
+                             ERROR o.h.tool.hbm2ddl.SchemaExport - HHH000389: Unsuccessful: drop sequence hibernate_sequence
+                             ERROR o.h.tool.hbm2ddl.SchemaExport - user lacks privilege or object not found: HIBERNATE_SEQUENCE in statement
+    ```
+Combination of create-drop and in-memory database produces these for every database object it tries to drop. Reason being that there is not any database objects to remove - DROP statements are executed against empty database.
+Also with normal permanent database such an errors do come, because Hibernate does not figure out before executing DROP statements does added object exist in database or is it new.
 
