@@ -223,9 +223,9 @@ Features
     
     __EmailService.java__
         
-        ```java
-            @Service
-            public class EmailService {
+    ```java
+        @Service
+        public class EmailService {
             
                 @Autowired
                 private JavaMailSender mailSender;
@@ -275,7 +275,7 @@ Features
                     }
                 }
             }
-        ```
+    ```
 
 
 
