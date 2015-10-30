@@ -45,9 +45,45 @@ Sign in
 Features
 --------
 * Sending AJAX request with Thymeleaf (I'm using jQuery, I didn't want to use Webflow or Tiles frameworks)
+    
+    *_list_customer.html_
+    ```js
+     $(document).ready(function () {
+            $("body").on("click", "#list-vehicles", function (e) {
+                var id = $(this).attr("data-vehicle_id");
+                var url = '/vehicle/list_vehicle_block/';
+                url = url + id;
+                $("#resultsBlock" + id).load(url);
+            });
+        });
+    ```
+
+    ```html
+            <td>
+                <button id="list-vehicles" th:attr="data-vehicle_id=${c.id}" type="button" class="btn btn-info">Info
+                </button>
+            </td>
+            <td>
+                <div th:id="resultsBlock+ ${c.id}"></div>
+            </td>
+    ```
+  
+    *_VehicleController.java_
+
+    ```java
+    private static final String VEHICLE_RESULT = LOCATION + "vehicle_result :: vehicleResultList";
+
+    @RequestMapping(value = "/list_vehicle_block/{customerId}", method = RequestMethod.GET)
+    public String showVehicleList(final Model model, @PathVariable("customerId") final int customerId) {
+        model.addAttribute("resultVehicles", vehicleRepository.findByCustomerId(customerId));
+        return VEHICLE_RESULT;
+    }
+    ```
+
 * Prevent Brute Force authentication attempts with Spring Security
 * Change the user interface language by clicking the country flags
 * Sending e-mail messages with Spring by configuring JavaMail API with JavaMailSenderImpl
 
 
 **[Note: No additional services are required in order to start the application. Although you can configure the SMTP server for sending e-mail messages in mail.properties as mail.host.]**
+
