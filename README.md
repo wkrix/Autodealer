@@ -46,7 +46,17 @@ Features
 --------
 * Sending AJAX request with Thymeleaf (I'm using jQuery, I didn't want to use Webflow or Tiles frameworks)
     
-    *_list_customer.html_
+    __list_customer.html__
+    
+    ```html
+            <td>
+                <button id="list-vehicles" th:attr="data-vehicle_id=${c.id}" type="button" class="btn btn-info">Info
+                </button>
+            </td>
+            <td>
+                <div th:id="resultsBlock+ ${c.id}"></div>
+            </td>
+    ```
     ```js
      $(document).ready(function () {
             $("body").on("click", "#list-vehicles", function (e) {
@@ -57,18 +67,8 @@ Features
             });
         });
     ```
-
-    ```html
-            <td>
-                <button id="list-vehicles" th:attr="data-vehicle_id=${c.id}" type="button" class="btn btn-info">Info
-                </button>
-            </td>
-            <td>
-                <div th:id="resultsBlock+ ${c.id}"></div>
-            </td>
-    ```
   
-    *_VehicleController.java_
+    __VehicleController.java__
 
     ```java
     private static final String VEHICLE_RESULT = LOCATION + "vehicle_result :: vehicleResultList";
@@ -80,8 +80,113 @@ Features
     }
     ```
 
+
 * Prevent Brute Force authentication attempts with Spring Security
+
+    __AuthenticationFailureListener.java__
+
+    ```java
+    @Component
+    public class AuthenticationFailureListener implements ApplicationListener<AuthenticationFailureBadCredentialsEvent> {
+    
+        @Autowired
+        private LoginAttemptService loginAttemptService;
+    
+        @Override
+        public void onApplicationEvent(AuthenticationFailureBadCredentialsEvent e) {
+            WebAuthenticationDetails auth = (WebAuthenticationDetails) e.getAuthentication().getDetails();
+            loginAttemptService.loginFailed(auth.getRemoteAddress());
+        }
+    }
+    ```
+    
+    __AuthenticationSuccessEventListener.java__
+
+    ```java
+    @Component
+    public class AuthenticationSuccessEventListener implements ApplicationListener<AuthenticationSuccessEvent> {
+    
+        @Autowired
+        private LoginAttemptService loginAttemptService;
+    
+        @Override
+        public void onApplicationEvent(AuthenticationSuccessEvent e) {
+            WebAuthenticationDetails auth = (WebAuthenticationDetails) e.getAuthentication().getDetails();
+            loginAttemptService.loginSucceeded(auth.getRemoteAddress());
+        }
+    
+    }
+    ```
+    
+     __SigninController.java__
+    
+      ```java
+         @RequestMapping(value = "signin")
+                public String signin() {
+                    final String ip = request.getRemoteAddr();
+                    if (loginAttemptService.isBlocked(ip)) {
+                        throw new LoginException("Bad login. IP BAN.");
+                    }
+                    return LOCATION;
+                }
+      ```
+   
+   
 * Change the user interface language by clicking the country flags
+
+    __lang-change.js__
+    
+    ```js
+         $(document).ready(function () {
+             $("#en_flag").on("click", function () {
+                 updateParam("lang", "en");
+             });
+             $("#hu_flag").on("click", function () {
+                 updateParam("lang", "hu");
+             });
+         });
+         
+         function updateParam(key, value) {
+             var q = String(location.search);
+         
+             if (q.length > 0) {
+                 if (q.indexOf(key) > -1) {
+                     var regExpPattern = key + "=([a-zA-Z]+)?";
+                     var regExp = new RegExp(regExpPattern);
+         
+                     q = q.replace(regExp, key + "=" + value);
+                 } else {
+                     q += "\u0026" + key + "=" + value;
+                 }
+             } else {
+                 q += "?" + key + "=" + value;
+             }
+         
+             location.search = q;
+     }
+    ```
+    
+    __WebAppConfiguration.java__
+    
+    ```java
+        @Bean
+        public LocaleResolver localeResolver() {
+            SessionLocaleResolver slr = new SessionLocaleResolver();
+            return slr;
+        }
+    
+        @Bean
+        public LocaleChangeInterceptor localeChangeInterceptor() {
+            LocaleChangeInterceptor lci = new LocaleChangeInterceptor();
+            lci.setParamName("lang");
+            return lci;
+        }
+    
+        @Override
+        public void addInterceptors(InterceptorRegistry registry) {
+            registry.addInterceptor(localeChangeInterceptor());
+        }
+    ```
 * Sending e-mail messages with Spring by configuring JavaMail API with JavaMailSenderImpl
 
 
