@@ -189,6 +189,95 @@ Features
     ```
 * Sending e-mail messages with Spring by configuring JavaMail API with JavaMailSenderImpl
 
+    __MailConfiguration.java__
+    
+    ```java
+        @Configuration
+        @PropertySource("classpath:mail.properties")
+        public class MailConfiguration {
+        
+            @Value("${mail.protocol}")
+            private String protocol;
+            @Value("${mail.host}")
+            private String host;
+            @Value("${mail.port}")
+            private int port;
+            @Value("${mail.smtp.auth}")
+            private boolean auth;
+            @Value("${mail.smtp.starttls.enable}")
+            private boolean starttls;
+        
+            @Bean
+            public JavaMailSender javaMailSender() {
+                JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+                Properties mailProperties = new Properties();
+                mailProperties.put("mail.smtp.auth", auth);
+                mailProperties.put("mail.smtp.starttls.enable", starttls);
+                mailSender.setJavaMailProperties(mailProperties);
+                mailSender.setHost(host);
+                mailSender.setPort(port);
+                mailSender.setProtocol(protocol);
+                return mailSender;
+            }
+    ```
+    
+    __EmailService.java__
+        
+        ```java
+            @Service
+            public class EmailService {
+            
+                @Autowired
+                private JavaMailSender mailSender;
+            
+                @Autowired
+                private TemplateEngine templateEngine;
+            
+                @Autowired
+                private HttpServletRequest request;
+            
+                @Autowired
+                private HttpServletResponse response;
+            
+                @Autowired
+                private MessageSource messageSource;
+            
+                @Autowired
+                private Environment environment;
+            
+                public void sendSimpleMail(final Customer loadedCustomer, final Vehicle vehicle) throws MessagingException {
+            
+                    // Prepare the evaluation context
+                    final Locale locale = RequestContextUtils.getLocale(request);
+                    final WebContext ctx = new WebContext(request, response, request.getServletContext(), locale);
+                    ctx.setVariable("name", loadedCustomer.getName());
+                    ctx.setVariable("sellDate", new Date());
+                    ctx.setVariable("vehicleName", vehicle.getVehicleName());
+                    ctx.setVariable("vehicleColor", vehicle.getColor());
+                    ctx.setVariable("vehicleType", vehicle.getType());
+            
+                    // Prepare message using a Spring helper
+                    final MimeMessage mimeMessage = mailSender.createMimeMessage();
+                    final MimeMessageHelper message = new MimeMessageHelper(mimeMessage, "UTF-8");
+                    String subject = messageSource.getMessage("email.subject", null, locale);
+                    message.setSubject(subject);
+                    message.setFrom(environment.getProperty("mail.from"));
+                    message.setTo(loadedCustomer.getEmail());
+            
+                    // Create the HTML body using Thymeleaf
+                    final String htmlContent = templateEngine.process("mails/email_simple", ctx);
+                    message.setText(htmlContent, true);
+            
+                    String host = environment.getProperty("mail.host");
+                    if (!environment.getProperty("mail.host").equals("")) {
+                        // Send email
+                        this.mailSender.send(mimeMessage);
+                    }
+                }
+            }
+        ```
+
+
 
 **[Note: No additional services are required in order to start the application. Although you can configure the SMTP server for sending e-mail messages in mail.properties as mail.host.]**
 
