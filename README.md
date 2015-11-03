@@ -276,7 +276,10 @@ Features
                 }
             }
     ```
-
+    
+ Get Inspired By These articles: 
+ - http://xpadro.blogspot.com.es/2014/02/thymeleaf-integration-with-spring-part-1.html
+ - http://blog.codeleak.pl/2013/11/is-it-worth-upgrading-to-thymeleaf-21.html
 
 
 **[Note1: No additional services are required in order to start the application. Although you can configure the SMTP server for sending e-mail messages in mail.properties as mail.host.]**

@@ -18,16 +18,3 @@ public class HomeControllerTest extends BaseTest {
         mockMvc.perform(get("/").session(session)).andExpect(view().name("views/home/home"));
     }
 }
-
-//    @Test
-//    public void testLoadRootWithAuth() throws Exception {
-//        // Test basic home controller request with a session and logged in user
-//
-//        MvcResult result = mockMvc.perform(get("/").session(session))
-//                .andExpect(status().isOk())
-//                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
-//                .andReturn();
-//        String content = result.getResponse().getContentAsString();
-//        assertNotNull(content);
-//        assertTrue(content.contains("Hello Spring Boot"));
-//    }
